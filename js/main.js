@@ -1,4 +1,7 @@
 import { COUNT_PHOTOS } from './constants.js';
 import { getPhotos } from './mock-data.js';
+import { renderCards } from './render-cards.js';
 
-console.log(getPhotos(COUNT_PHOTOS));
+
+const data = getPhotos(COUNT_PHOTOS);
+renderCards(data);

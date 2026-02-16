@@ -1,5 +1,8 @@
 import { Comments, DESCRIPTION, Likes, MESSAGES, NAMES } from './constants.js';
-import { getRandomInteger } from './utils.js';
+import { getRandomInteger, uniqueGenerator } from './utils.js';
+
+const photoGenerator = uniqueGenerator(1, 25);
+const idGenerator = uniqueGenerator(1, 25);
 
 const createComment = () => ({
   id: getRandomInteger(1000000, 99999999),
@@ -9,8 +12,8 @@ const createComment = () => ({
 });
 
 const getPhoto = (_, i) => ({
-  id: i + 1,
-  url: `photos/${i + 1}.jpg`,
+  id: idGenerator(),
+  url: `photos/${photoGenerator()}.jpg`,
   description: DESCRIPTION[getRandomInteger(0, DESCRIPTION.length - 1)],
   likes: getRandomInteger(Likes.MIN, Likes.MAX),
   comments: Array.from({ length: getRandomInteger(Comments.MIN, Comments.MAX) }, createComment),
