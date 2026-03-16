@@ -1,3 +1,5 @@
+const body = document.body;
+
 export const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -9,7 +11,7 @@ export const uniqueGenerator = (a, b) => {
   const numbers = [];
   return () => {
     if (numbers.length > b - a + 1) {
-      return
+      return;
     }
     let n = getRandomInteger(a, b);
     while (numbers.includes(n)) {
@@ -27,4 +29,14 @@ export const debounce = (callback, timeoutDelay = 500) => {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
+};
+
+export const showModal = (modal, isVisible = true) => {
+  if (isVisible) {
+    modal.classList.remove('hidden');
+    body.classList.add('modal-open');
+  } else {
+    modal.classList.add('hidden');
+    body.classList.remove('modal-open');
+  }
 };
