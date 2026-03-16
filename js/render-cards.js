@@ -1,9 +1,11 @@
+import { openModal } from './modal.js';
+
 const template = document
   .querySelector('#picture')
   .content
   .querySelector('.picture');
 
-const pictures = document.querySelector('.pictures');
+const picturesNode = document.querySelector('.pictures');
 
 export const renderCards = (photos) => {
   const fragment = document.createDocumentFragment();
@@ -15,7 +17,10 @@ export const renderCards = (photos) => {
     newCard.querySelector('.picture__comments').textContent = photo.comments.length;
     newCard.querySelector('.picture__likes').textContent = photo.likes;
     fragment.append(newCard);
+    newCard.addEventListener('click', () => {
+      openModal(photo);
+    });
   });
-  pictures.append(fragment);
+  picturesNode.append(fragment);
 };
 

@@ -1,3 +1,18 @@
+export const Scale = {
+  MIN: 25,
+  MAX: 100,
+  STEP: 25,
+  DEFAULT: 100,
+};
+
+export const MAX_HASHTAGS = 5;
+
+export const HASHTAG_FORMULA = /^#[a-zа-я0-9ё]{1,19}$/i;
+
+export const MAX_DESCRIPTION = 5;
+
+export const STEP_COMMENTS = 5;
+
 export const COUNT_PHOTOS = 25;
 
 export const Likes = {
@@ -23,3 +38,5 @@ export const MESSAGES = [
 export const DESCRIPTION = ['утро', 'солнышко', 'собака'];
 
 export const NAMES = ["Виктор", "Диана", "Анастасия", "Александра", "Борис"];
+
+
