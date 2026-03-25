@@ -1,3 +1,107 @@
+export const Popups = {
+  SUCCESS: 'success',
+  ERROR: 'error',
+};
+
+export const EFFECTS = {
+  NONE: 'none',
+  CHROME: 'chrome',
+  SEPIA: 'sepia',
+  MARVIN: 'marvin',
+  PHOBOS: 'phobos',
+  HEAT: 'heat',
+};
+
+// Для эффекта «Хром» — filter: grayscale(0..1) с шагом 0.1;
+// Для эффекта «Сепия» — filter: sepia(0..1) с шагом 0.1;
+// Для эффекта «Марвин» — filter: invert(0..100%) с шагом 1%;
+// Для эффекта «Фобос» — filter: blur(0..3px) с шагом 0.1px;
+// Для эффекта «Зной» — filter: brightness(1..3) с шагом 0.1;
+
+export const Effects = {
+  [EFFECTS.NONE]: {
+    style: '',
+    units: '',
+    slider: {
+      range: {
+        min: 0,
+        max: 100,
+      },
+      step: 0.1,
+      start: 100,
+      connect: 'lower',
+      format: {
+        to: function (value) {
+          return parseFloat(value);
+        },
+        from: function (value) {
+          return parseFloat(value);
+        },
+      },
+    },
+  },
+  [EFFECTS.CHROME]: {
+    style: 'grayscale',
+    units: '',
+    slider: {
+      range: {
+        min: 0,
+        max: 1,
+      },
+      step: 0.1,
+      start: 1,
+    },
+  },
+  [EFFECTS.SEPIA]: {
+    style: 'sepia',
+    units: '',
+    slider: {
+      range: {
+        min: 0,
+        max: 1,
+      },
+      step: 0.1,
+      start: 1,
+    },
+  },
+  [EFFECTS.MARVIN]: {
+    style: 'invert',
+    units: '%',
+    slider: {
+      range: {
+        min: 0,
+        max: 100,
+      },
+      step: 1,
+      start: 100,
+    },
+  },
+  [EFFECTS.PHOBOS]: {
+    style: 'blur',
+    units: 'px',
+    slider: {
+      range: {
+        min: 0,
+        max: 3,
+      },
+      step: 0.1,
+      start: 3,
+    },
+  },
+  [EFFECTS.HEAT]: {
+    style: 'brightness',
+    units: '',
+    slider: {
+      range: {
+        min: 1,
+        max: 3,
+      },
+      step: 0.1,
+      start: 3,
+    },
+  },
+};
+
 export const Scale = {
   MIN: 25,
   MAX: 100,

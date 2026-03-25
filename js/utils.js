@@ -1,4 +1,5 @@
 const body = document.body;
+const alertTemplate = body.querySelector('#data-error').content.querySelector('.data-error');
 
 export const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -40,3 +41,12 @@ export const showModal = (modal, isVisible = true) => {
     body.classList.remove('modal-open');
   }
 };
+
+export const showAlert = (error) => {
+  const alert = alertTemplate.cloneNode(true);
+  alert.querySelector('.data-error__title').textContent = error;
+  body.append(alert);
+};
+
+
+

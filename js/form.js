@@ -1,3 +1,7 @@
+import { Popups } from './constants.js';
+import './effect.js';
+import { resetEffects } from './effect.js';
+import { showPopup } from './popups.js';
 import { resetScale } from './scale.js';
 import { showModal } from './utils.js';
 import { isValid, resetValidation } from './validation.js';
@@ -16,6 +20,7 @@ const closeModal = () => {
   formNode.reset();
   resetValidation();
   resetScale();
+  resetEffects();
 };
 
 inputNode.addEventListener('change', () => {
@@ -28,10 +33,26 @@ closeButtonNode.addEventListener('click', (evt) => {
 });
 
 formNode.addEventListener('submit', (evt) => {
-  if (!isValid()) {
-    evt.preventDefault();
+  evt.preventDefault();
+  if (isValid()) {
+    //  to disable of submit button.
+    fetch('https://31.javascript.htmlacademy.pro/kekstagram/', {
+      method: 'post',
+      body: new FormData(formNode),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('ОШИБКАААА!!!!');
+        }
+        closeModal();
+        showPopup(Popups.SUCCESS);
+      })
+      .finally(() => {
+        //to enable of submit button
+      })
+      .catch(() => {
+        showPopup(Popups.ERROR);
+      })
   }
 });
 
-//Функция параметризированная которая открывает/закрывает(при нажатии на крестик).
-//Два скролла.
