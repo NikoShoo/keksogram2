@@ -11,8 +11,10 @@ const inputNode = formNode.querySelector('#upload-file');
 const modalNode = formNode.querySelector('.img-upload__overlay');
 const closeButtonNode = modalNode.querySelector('.img-upload__cancel');
 
+
 const openModal = () => {
   showModal(modalNode);
+  document.addEventListener('keydown', onDocumentKeydown);
 };
 
 const closeModal = () => {
@@ -21,7 +23,14 @@ const closeModal = () => {
   resetValidation();
   resetScale();
   resetEffects();
+  document.removeEventListener('keydown', onDocumentKeydown);
 };
+
+function onDocumentKeydown(evt) {
+  if (evt.key === 'Escape') {
+    closeModal();
+  }
+}
 
 inputNode.addEventListener('change', () => {
   openModal();

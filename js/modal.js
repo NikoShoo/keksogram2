@@ -1,4 +1,5 @@
-import { STEP_COMMENTS } from './constants.js';
+import { Popups, STEP_COMMENTS } from './constants.js';
+import { showPopup } from './popups.js';
 import { showModal } from './utils.js';
 
 const modalNode = document.querySelector('.big-picture');
@@ -14,6 +15,7 @@ const shownCommentsNode = modalNode.querySelector('.social__comment-shown-count'
 
 let localComments;
 let shownComments;
+let currentPicture;
 
 const renderStatistic = () => {
   shownCommentsNode.textContent = shownComments;
@@ -61,8 +63,18 @@ loaderNode.addEventListener('click', () => {
   renderComments();
 });
 
+const onDocumentKeydown = (evt) => {
+  if (evt.key === 'Escape') {
+    showModal(modalNode, false);
+    showPopup(Popups.WARNING, currentPicture);
+    document.removeEventListener('keydown', onDocumentKeydown);
+  }
+};
+
 closeButtonNode.addEventListener('click', () => {
   showModal(modalNode, false);
+  showPopup(Popups.WARNING, currentPicture);
+  document.removeEventListener('keydown', onDocumentKeydown);
 });
 
 export const openModal = (picture) => {
@@ -70,5 +82,10 @@ export const openModal = (picture) => {
   renderModal(picture);
   // show modal
   showModal(modalNode);
+  currentPicture = {
+    description: picture.description,
+    url: picture.url,
+  };
+  document.addEventListener('keydown', onDocumentKeydown);
 };
 

@@ -1,6 +1,7 @@
 export const Popups = {
   SUCCESS: 'success',
   ERROR: 'error',
+  WARNING: 'warning',
 };
 
 export const EFFECTS = {
