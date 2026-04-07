@@ -10,6 +10,8 @@ const formNode = document.querySelector('.img-upload__form');
 const inputNode = formNode.querySelector('#upload-file');
 const modalNode = formNode.querySelector('.img-upload__overlay');
 const closeButtonNode = modalNode.querySelector('.img-upload__cancel');
+const descriptionNode = formNode.querySelector('.text__description');
+const hashtagNode = formNode.querySelector('.text__hashtags');
 
 
 const openModal = () => {
@@ -28,6 +30,12 @@ const closeModal = () => {
 
 function onDocumentKeydown(evt) {
   if (evt.key === 'Escape') {
+    if (document.activeElement === descriptionNode || document.activeElement === hashtagNode) {
+      return;
+    }
+    if (document.querySelector('.popup')) {
+      return;
+    }
     closeModal();
   }
 }
@@ -45,7 +53,7 @@ formNode.addEventListener('submit', (evt) => {
   evt.preventDefault();
   if (isValid()) {
     //  to disable of submit button.
-    fetch('https://31.javascript.htmlacademy.pro/kekstagram/', {
+    fetch('https://31.javascript.htmlacademy.pro/kekstagram/1', {
       method: 'post',
       body: new FormData(formNode),
     })
