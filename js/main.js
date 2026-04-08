@@ -7,7 +7,6 @@ import { showAlert } from './utils.js';
 // console.log(data);
 // renderCards(data);
 
-
 const initApp = async () => {
   try {
     const photos = await getData();

@@ -1238,6 +1238,7 @@ main {
   align-items: center;
 
   font-family: "Open Sans", "Arial", sans-serif;
+  line-height: 35px;
   text-align: center;
   font-weight: 700;
   font-size: 20px;
@@ -1306,11 +1307,20 @@ main {
   height: 150px;
   margin: 0 auto 20px;
 }
+.warning__img {
+  display: block;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 20px;
+}
 
 .error__button:hover,
 .error__button:focus,
 .success__button:hover,
-.success__button:focus {
+.success__button:focus,
+.warning__button:hover,
+.warning__button:focus
+ {
   opacity: 0.8;
 }
 

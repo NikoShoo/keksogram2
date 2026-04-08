@@ -1,4 +1,4 @@
-import { EFFECTS, Effects } from "./constants";
+import { EFFECTS, Effects } from './constants.js';
 
 const fildsetNode = document.querySelector('.img-upload__effect-level');
 const effectListNode = document.querySelector('.effects__list');
@@ -41,7 +41,6 @@ export const resetEffects = () => {
 
 
 effectListNode.addEventListener('change', (evt) => {
-  console.log(evt.target.value);
   currentEffect = evt.target.value;
   if (currentEffect === EFFECTS.NONE) {
     resetEffects();
