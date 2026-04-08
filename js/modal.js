@@ -1,4 +1,5 @@
 import { Popups, STEP_COMMENTS } from './constants.js';
+import { registerWindows, unregisterWindows } from './escape.js';
 import { showPopup } from './popups.js';
 import { showModal } from './utils.js';
 
@@ -63,18 +64,23 @@ loaderNode.addEventListener('click', () => {
   renderComments();
 });
 
-const onDocumentKeydown = (evt) => {
-  if (evt.key === 'Escape') {
-    showModal(modalNode, false);
-    showPopup(Popups.WARNING, currentPicture);
-    document.removeEventListener('keydown', onDocumentKeydown);
-  }
+// const onDocumentKeydown = (evt) => {
+//   if (evt.key === 'Escape') {
+//     showModal(modalNode, false);
+//     showPopup(Popups.WARNING, currentPicture);
+//      document.removeEventListener('keydown', onDocumentKeydown);
+//   }
+// };
+
+const closeModal = () => {
+  showModal(modalNode, false);
+  showPopup(Popups.WARNING, currentPicture);
 };
 
 closeButtonNode.addEventListener('click', () => {
-  showModal(modalNode, false);
-  showPopup(Popups.WARNING, currentPicture);
-  document.removeEventListener('keydown', onDocumentKeydown);
+  unregisterWindows();
+  closeModal();
+  // document.removeEventListener('keydown', onDocumentKeydown);
 });
 
 export const openModal = (picture) => {
@@ -86,6 +92,7 @@ export const openModal = (picture) => {
     description: picture.description,
     url: picture.url,
   };
-  document.addEventListener('keydown', onDocumentKeydown);
+  registerWindows(closeModal);
+  // document.addEventListener('keydown', onDocumentKeydown);
 };
 

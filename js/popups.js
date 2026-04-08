@@ -1,4 +1,5 @@
 import { Popups } from './constants.js';
+import { registerWindows, unregisterWindows } from './escape.js';
 
 const body = document.body;
 const successTemplate = body.querySelector('#success').content.querySelector('.success');
@@ -24,16 +25,21 @@ export const showPopup = (type, data = null) => {
       : title.textContent = `Вы только что посмотрели красивое ФОТО  ${data.description}`;
   }
   body.append(popup);
-  document.addEventListener('keydown', onDocumentKeydown);
-  function onDocumentKeydown(evt) {
-    if (evt.key === 'Escape') {
-      popup.remove();
-      document.removeEventListener('keydown', onDocumentKeydown);
-    }
-  }
+  registerWindows(() => {
+    popup.remove();
+  });
+  // document.addEventListener('keydown', onDocumentKeydown);
+  // function onDocumentKeydown(evt) {
+  //   if (evt.key === 'Escape') {
+  //     popup.remove();
+  //     document.removeEventListener('keydown', onDocumentKeydown);
+  //   }
+  // }
   popup.addEventListener('click', ({ target }) => {
     if (target.classList.contains(type) || target.classList.contains(`${type}__button`)) {
       popup.remove();
+      unregisterWindows();
+      //document.removeEventListener('keydown', onDocumentKeydown);
     }
   });
 };
